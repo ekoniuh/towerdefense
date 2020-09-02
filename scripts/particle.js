@@ -1,30 +1,5 @@
 import {
-  between,
-  atTileCenter,
-  buildArray,
-  center,
-  copyArray,
-  copyToClipboard,
-  cts,
-  getByName,
-  getFirst,
-  getInRange,
-  getNearest,
-  getNoEffect,
-  getStrongest,
-  getTaunting,
-  gridPos,
-  insideCircle,
-  mouseInMap,
-  neighbors,
-  outsideRect,
-  polygon,
-  randint,
-  rangeText,
-  removeTempSpawns,
-  replaceArray,
-  stv,
-  vts,
+  randint
 } from './utils';
 
 class Particle {

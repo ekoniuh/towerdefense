@@ -94,7 +94,7 @@ function getByName(entities, names) {
 
 // Get first enemy (i.e. closest to exit)
 // TODO determine more accurate selection system that is not fooled by loops
-function getFirst(entities) {
+function getFirst(dists, entities) {
   var leastDist = 10000;
   var chosen = entities[0];
   for (var i = 0; i < entities.length; i++) {
@@ -233,7 +233,7 @@ function rangeText(min, max) {
 }
 
 // Remove empty temporary spawnpoints
-function removeTempSpawns() {
+function removeTempSpawns(tempSpawns) {
   for (var i = tempSpawns.length - 1; i >= 0; i--) {
     if (tempSpawns[i][1] === 0) tempSpawns.splice(i, 1);
   }

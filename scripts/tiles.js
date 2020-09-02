@@ -1,33 +1,8 @@
 import {
-  between,
-  atTileCenter,
-  buildArray,
   center,
-  copyArray,
-  copyToClipboard,
-  cts,
-  getByName,
-  getFirst,
-  getInRange,
-  getNearest,
-  getNoEffect,
-  getStrongest,
-  getTaunting,
-  gridPos,
-  insideCircle,
-  mouseInMap,
-  neighbors,
-  outsideRect,
-  polygon,
-  randint,
-  rangeText,
-  removeTempSpawns,
-  replaceArray,
-  stv,
-  vts,
 } from './utils';
 
-var tiles = {
+export let tiles = {
   // Basic
   empty: null,
   tower: [51, 110, 123],

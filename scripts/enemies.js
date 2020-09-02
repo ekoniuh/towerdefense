@@ -1,6 +1,7 @@
 import { getInRange, gridPos } from './utils';
+import { Enemy } from './enemy';
 
-function createEnemy(x, y, template) {
+export function createEnemy(x, y, template) {
   var e = new Enemy(x, y);
   // Fill in all keys
   template = typeof template === 'undefined' ? {} : template;
@@ -13,7 +14,7 @@ function createEnemy(x, y, template) {
   return e;
 }
 
-var enemy = {};
+export var enemy = {};
 
 enemy.weak = {
   // Display

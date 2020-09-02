@@ -2,8 +2,10 @@ import {
   atTileCenter,
   getByName,
   gridPos,
+  outsideRect
 } from './utils';
-class Enemy {
+
+export class Enemy {
   constructor(x, y) {
     // Display
     this.color = [0, 0, 0];
@@ -124,7 +126,7 @@ class Enemy {
   }
 
   // Change direction based on pathfinding map
-  steer() {
+  steer(paths, rows, cols) {
     var t = gridPos(this.pos.x, this.pos.y);
     if (outsideRect(t.x, t.y, 0, 0, cols, rows)) return;
     var dir = paths[t.x][t.y];

@@ -1,29 +1,35 @@
-import { between,
+// its a Main file
+
+import {
     atTileCenter,
     buildArray,
     center,
     copyArray,
     copyToClipboard,
-    cts,
-    getByName,
-    getFirst,
-    getInRange,
-    getNearest,
-    getNoEffect,
-    getStrongest,
-    getTaunting,
     gridPos,
-    insideCircle,
     mouseInMap,
     neighbors,
     outsideRect,
-    polygon,
     randint,
-    rangeText,
     removeTempSpawns,
     replaceArray,
     stv,
-    vts} from './utils';
+    vts
+} from './utils';
+
+import {
+    tiles
+} from './tiles';
+
+import {
+    createTower,
+    tower
+} from './towers';
+
+import {
+    createEnemy,
+    enemy
+} from './enemies';
 
 var enemies = [];
 var projectiles = [];
@@ -37,6 +43,7 @@ var cols;
 var rows;
 var tileZoom = 2;
 var ts = 24;            // tile size
+window.ts = ts;
 var zoomDefault = ts;
 
 var particleAmt = 32;   // number of particles to draw per explosion
@@ -60,7 +67,8 @@ var exit;
 var spawnpoints = [];
 var tempSpawns = [];
 
-var cash;
+// var cash;
+window.cash = 0;
 var health;
 var maxHealth;
 var wave;
@@ -74,20 +82,23 @@ var borderAlpha;        // alpha of tile borders
 var selected;
 var towerType;
 
-var sounds;             // dict of all sounds
+// var sounds = {};             // dict of all sounds
+window.sounds = {};
 var boomSound;          // explosion sound effect
 
 // TODO add more functionality to god mode
 var godMode = false;    // make player immortal for test purposes
 var healthBar = true;   // display enemy health bar
-var muteSounds = false; // whether to mute sounds
+// var muteSounds = false; // whether to mute sounds
+window.muteSounds = false;
 var paused;             // whether to update or not
 var randomWaves = true; // whether to do random or custom waves
 var scd;                // number of ticks until next spawn cycle
 var showEffects = true; // whether or not to display particle effects
 var showFPS = false;    // whether or not to display FPS
 var skipToNext = false; // whether or not to immediately start next wave
-var stopFiring = false; // whether or not to pause towers firing
+// var stopFiring = false; // whether or not to pause towers firing
+window.stopFiring = false;
 var toCooldown;         // flag to reset spawning cooldown
 var toPathfind;         // flag to update enemy pathfinding
 var toPlace;            // flag to place a tower
@@ -100,6 +111,7 @@ var numFPS = 0;         // number of FPS values calculated so far
 var minDist = 15;       // minimum distance between spawnpoint and exit
 var resistance = 0.5;   // percentage of damage blocked by resistance
 var sellConst = 0.8;    // ratio of tower cost to sell price
+window.sellConst = sellConst;
 var wallCover = 0.1;    // percentage of map covered by walls
 var waveCool = 120;     // number of ticks between waves
 var weakness = 0.5;     // damage increase from weakness
@@ -198,7 +210,7 @@ function empty(col, row) {
     if (typeof exit !== 'undefined') {
         if (exit.x === col && exit.y === row) return false;
     }
-    
+
     return true;
 }
 
@@ -308,7 +320,7 @@ function loadMap() {
 
     health = 40;
     cash = 55;
-    
+
     if (name === 'custom' && custom) {
         // Grids
         display = copyArray(custom.display);
@@ -399,8 +411,6 @@ function loadMap() {
 
 // Load all sounds
 function loadSounds() {
-    sounds = {};
-    
     // Missile explosion
     sounds.boom = loadSound('sounds/boom.wav');
     sounds.boom.setVolume(0.3);
@@ -805,12 +815,15 @@ function preload() {
     loadSounds();
 }
 
+window.preload = preload;
+
 function setup() {
     var div = document.getElementById('sketch-holder');
     var canvas = createCanvas(div.offsetWidth, div.offsetHeight);
     canvas.parent('sketch-holder');
     resetGame();
 }
+window.setup = setup;
 
 // TODO show range of selected tower
 function draw() {
@@ -890,7 +903,7 @@ function draw() {
 
         // Update direction and position
         if (!paused) {
-            e.steer();
+            e.steer(paths, rows, cols);
             e.update();
             e.onTick();
         }
@@ -920,7 +933,7 @@ function draw() {
 
         // Target enemies and update cooldowns
         if (!paused) {
-            t.target(enemies);
+            t.target(enemies, dists);
             t.update();
         }
 
@@ -1006,12 +1019,12 @@ function draw() {
         noStroke();
         fill(0);
         rect(width - 60, 0, 60, 22);
-        
+
         fill(255);
         text('Firing off', width - 55, 15);
     }
 
-    removeTempSpawns();
+    removeTempSpawns(tempSpawns);
 
     projectiles = projectiles.concat(newProjectiles);
     towers = towers.concat(newTowers);
@@ -1046,7 +1059,7 @@ function draw() {
         toPathfind = false;
     }
 }
-
+window.draw = draw;
 
 // User input
 
@@ -1164,12 +1177,13 @@ function keyPressed() {
             break;
     }
 }
+window.keyPressed = keyPressed;
 
 function mousePressed() {
     if (!mouseInMap()) return;
     var p = gridPos(mouseX, mouseY);
     var t = getTower(p.x, p.y);
-    
+
     if (t) {
         // Clicked on tower
         selected = t;
@@ -1179,8 +1193,16 @@ function mousePressed() {
         buy(createTower(p.x, p.y, tower[towerType]));
     }
 }
+window.mousePressed = mousePressed;
 
 
 // Events
-
+window.pause = pause;
+window.resetGame = resetGame;
+window.setPlace = setPlace;
+window.copyToClipboard = copyToClipboard;
+window.importMap = importMap;
+window.exportMap = exportMap;
+window.sell = sell;
+window.upgrade = upgrade;
 document.getElementById('map').addEventListener('change', resetGame);

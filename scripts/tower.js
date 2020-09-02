@@ -1,32 +1,11 @@
 import {
-  between,
-  atTileCenter,
-  buildArray,
-  center,
-  copyArray,
-  copyToClipboard,
-  cts,
-  getByName,
   getFirst,
   getInRange,
-  getNearest,
-  getNoEffect,
-  getStrongest,
   getTaunting,
-  gridPos,
-  insideCircle,
-  mouseInMap,
-  neighbors,
-  outsideRect,
-  polygon,
-  randint,
   rangeText,
-  removeTempSpawns,
-  replaceArray,
-  stv,
-  vts,
 } from './utils';
-class Tower {
+
+export class Tower {
   constructor(col, row) {
     // Display
     this.baseOnTop = true; // render base over barrel
@@ -164,12 +143,12 @@ class Tower {
   }
 
   // Target correct enemy
-  target(entities) {
+  target(entities, dists) {
     entities = this.visible(entities);
     if (entities.length === 0) return;
     var t = getTaunting(entities);
     if (t.length > 0) entities = t;
-    var e = getFirst(entities);
+    var e = getFirst(dists, entities);
     if (typeof e === 'undefined') return;
     this.onAim(e);
   }

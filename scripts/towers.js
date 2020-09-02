@@ -6,14 +6,18 @@ import {
   polygon,
 } from './utils';
 
-function createTower(x, y, template) {
+import {
+  Tower
+} from './tower';
+
+export function createTower(x, y, template) {
   var t = new Tower(x, y);
   t.upgrade(template);
   t.onCreate();
   return t;
 }
 
-var tower = {};
+export var tower = {};
 
 tower.gun = {
   // Display
