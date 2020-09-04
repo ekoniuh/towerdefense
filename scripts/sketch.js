@@ -31,9 +31,12 @@ import {
     enemy
 } from './enemies';
 
-var enemies = [];
-var projectiles = [];
-var systems = [];
+// var enemies = [];
+window.enemies = [];
+// var projectiles = [];
+window.projectiles = [];
+// var systems = [];
+window.systems = [];
 var towers = [];
 var newEnemies = [];
 var newProjectiles = [];
@@ -46,7 +49,8 @@ var ts = 24;            // tile size
 window.ts = ts;
 var zoomDefault = ts;
 
-var particleAmt = 32;   // number of particles to draw per explosion
+// var particleAmt = 32;   // number of particles to draw per explosion
+window.particleAmt = 32;
 
 var tempSpawnCount = 40;
 
@@ -79,7 +83,8 @@ var bg;                 // background color
 var border;             // color to draw on tile borders
 var borderAlpha;        // alpha of tile borders
 
-var selected;
+// var selected;
+window.selected = undefined;
 var towerType;
 
 // var sounds = {};             // dict of all sounds
@@ -91,10 +96,12 @@ var godMode = false;    // make player immortal for test purposes
 var healthBar = true;   // display enemy health bar
 // var muteSounds = false; // whether to mute sounds
 window.muteSounds = false;
-var paused;             // whether to update or not
+// var paused;             // whether to update or not
+window.paused = false;
 var randomWaves = true; // whether to do random or custom waves
 var scd;                // number of ticks until next spawn cycle
-var showEffects = true; // whether or not to display particle effects
+// var showEffects = true; // whether or not to display particle effects
+window.showEffects = true;
 var showFPS = false;    // whether or not to display FPS
 var skipToNext = false; // whether or not to immediately start next wave
 // var stopFiring = false; // whether or not to pause towers firing
@@ -319,7 +326,7 @@ function loadMap() {
     var name = document.getElementById('map').value;
 
     health = 40;
-    cash = 55;
+    cash = 1055;
 
     if (name === 'custom' && custom) {
         // Grids

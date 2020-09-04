@@ -1,4 +1,4 @@
-class Effect {
+export class Effect {
     constructor(duration) {
         // Display
         this.color = [0, 0, 0];

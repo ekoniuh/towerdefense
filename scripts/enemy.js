@@ -5,6 +5,11 @@ import {
   outsideRect
 } from './utils';
 
+import {
+  createEffect,
+  effects
+} from './effects';
+
 export class Enemy {
   constructor(x, y) {
     // Display

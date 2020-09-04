@@ -1,4 +1,8 @@
-function createEffect(duration, template) {
+import {
+  Effect
+} from './effect';
+
+export function createEffect(duration, template) {
   var e = new Effect(duration);
   // Fill in all keys
   template = typeof template === 'undefined' ? {} : template;
@@ -10,7 +14,7 @@ function createEffect(duration, template) {
   return e;
 }
 
-var effects = {};
+export var effects = {};
 
 effects.slow = {
   // Display

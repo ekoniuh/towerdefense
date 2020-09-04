@@ -1,3 +1,10 @@
+import {
+  Particle,
+  Bomb,
+  Fire,
+  Shrapnel
+} from './particle';
+
 class ParticleSystem {
   constructor(x, y) {
     this.origin = createVector(x, y);
@@ -22,7 +29,7 @@ class ParticleSystem {
   }
 }
 
-class RocketExplosion extends ParticleSystem {
+export class RocketExplosion extends ParticleSystem {
   constructor(x, y) {
     super(x, y);
   }
@@ -32,7 +39,7 @@ class RocketExplosion extends ParticleSystem {
   }
 }
 
-class BombExplosion extends ParticleSystem {
+export class BombExplosion extends ParticleSystem {
   constructor(x, y) {
     super(x, y);
   }
@@ -42,7 +49,7 @@ class BombExplosion extends ParticleSystem {
   }
 }
 
-class ShrapnelExplosion extends ParticleSystem {
+export class ShrapnelExplosion extends ParticleSystem {
   constructor(x, y) {
     super(x, y);
   }

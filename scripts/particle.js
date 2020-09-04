@@ -2,7 +2,7 @@ import {
   randint
 } from './utils';
 
-class Particle {
+export class Particle {
   constructor(pos, speed) {
     this.pos = pos.copy();
     this.vel = p5.Vector.random2D().mult((random(-1, 1) * speed * ts) / 24);
@@ -34,7 +34,7 @@ class Particle {
   }
 }
 
-class Fire extends Particle {
+export class Fire extends Particle {
   constructor(pos, speed) {
     super(pos, speed);
     this.angle = random(TWO_PI);
@@ -64,7 +64,7 @@ class Fire extends Particle {
   }
 }
 
-class Bomb extends Particle {
+export class Bomb extends Particle {
   constructor(pos, speed) {
     super(pos, speed);
     this.decay = random(8, 10);
@@ -73,7 +73,7 @@ class Bomb extends Particle {
   }
 }
 
-class Shrapnel extends Fire {
+export class Shrapnel extends Fire {
   constructor(pos, speed) {
     super(pos, speed);
     this.decay = random(8, 10);

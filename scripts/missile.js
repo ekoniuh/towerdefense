@@ -1,6 +1,7 @@
 import { getInRange, getNearest, getTaunting, insideCircle } from './utils';
+import { RocketExplosion } from './particle_system';
 
-class Missile {
+export class Missile {
   constructor(x, y, e) {
     // Physics
     this.pos = createVector(x, y);

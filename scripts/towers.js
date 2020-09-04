@@ -10,6 +10,17 @@ import {
   Tower
 } from './tower';
 
+import {
+  Missile
+} from './missile';
+
+import {
+  BombExplosion,
+  ShrapnelExplosion
+} from './particle_system';
+
+
+
 export function createTower(x, y, template) {
   var t = new Tower(x, y);
   t.upgrade(template);
